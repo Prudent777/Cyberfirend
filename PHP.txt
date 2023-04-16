@@ -1,0 +1,39 @@
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exemple d'utilisation de l'API Skybox</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<h1>Exemple d'utilisation de l'API Skybox</h1>
+	
+	<?php
+		// Clé d'API obtenue sur https://skybox.blockadelabs.com/
+		$api_key = "VOTRE_CLE_API";
+		
+		// URL de l'API pour récupérer une liste d'images
+		$url = "https://skybox.blockadelabs.com/api/v1/images?key=" . $api_key;
+		
+		// Requête GET à l'API
+		$response = file_get_contents($url);
+		
+		// Conversion de la réponse JSON en tableau PHP
+		$data = json_decode($response, true);
+		
+		// Affichage des images dans une grille
+		echo "<div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 1rem;'>";
+		
+		foreach ($data as $image) {
+			echo "<div>";
+			echo "<img src='" . $image["url"] . "' alt='" . $image["title"] . "'>";
+			echo "<p>" . $image["title"] . "</p>";
+			echo "</div>";
+		}
+		
+		echo "</div>";
+	?>
+</body>
+</html>
+```
